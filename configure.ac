@@ -73,8 +73,6 @@ dnl  ***************************************************************************
 
 IT_PROG_INTLTOOL([0.35.0])
 
-AC_CHECK_FUNCS([setlocale])
-
 AC_SUBST([GETTEXT_PACKAGE], ['nautilus-bluetooth'])
 
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [GETTEXT package name])

@@ -4,7 +4,7 @@
 |*|
 |*|	nautilus-bluetooth.c
 |*|
-|*|	https://madmurphy.github.io/nautilus-bluetooth/
+|*|	https://github.com/madmurphy/nautilus-bluetooth
 |*|	Copyright (C) 2019 Stefano Gioffr&eacute; <madmurphy333@gmail.com>
 |*|
 |*|	nautilus-bluetooth is free software: you can redistribute it and/or modify it
@@ -92,7 +92,7 @@ static void nautilus_bluetooth_sendto (
 
 	} else if (proc_id > 0) {
 
-		/* parent */
+		/*  Parent  */
 
 		for (idx = 1; idx < argv_last; g_free(argv[idx++]));
 
@@ -100,7 +100,7 @@ static void nautilus_bluetooth_sendto (
 
 	} else {
 
-		/* child */
+		/*  Child  */
 
 		if (execv(*argv, argv) == -1) {
 
@@ -108,7 +108,6 @@ static void nautilus_bluetooth_sendto (
 
 		}
 
-		/* should never get here */
 		_exit(1);
 
 	}
@@ -140,12 +139,7 @@ static GList * nautilus_bluetooth_get_file_items (
 
 	for (iter = file_selection; iter; iter = iter->next) {
 
-		/*
-
-			The "Send via Bluetooth" menu entry will not be shown if a
-			directory is found among the selected files.
-
-		*/
+		/*  Avoid directories  */
 
 		if (nautilus_file_info_is_directory(NAUTILUS_FILE_INFO(iter->data))) {
 
@@ -232,10 +226,7 @@ void nautilus_module_initialize (GTypeModule  * module) {
 
 	#ifdef ENABLE_NLS
 
-	setlocale(LC_ALL, "");
 	bindtextdomain(GETTEXT_PACKAGE, NAUTILUS_BLUETOOTH_LOCALEDIR);
-	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
-	// textdomain(GETTEXT_PACKAGE);
 
 	#endif
 

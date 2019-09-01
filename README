@@ -9,12 +9,12 @@ Get involved
 
 The package needs help with internationalization. If a translation into your language is missing and you wish to get involved, here is what to do.
 
-There are only two strings to translate:
+Let's say you want to create a Dutch translation of **nautilus-bluetooth**. The package comes with only two strings to translate:
 
 1. “Send via Bluetooth”
 2. “Send the selected files to a Bluetooth device”
 
-Let's say you want to create a Dutch translation of **nautilus-bluetooth**. First thing to do is to make sure that `gettext` is installed in your system. Then clone this repository and launch the following two commands:
+First thing to do is to make sure that `gettext` is installed in your system. Then clone this repository and launch the following two commands:
 
 ```
 cd nautilus-bluetooth/po
@@ -23,4 +23,9 @@ msginit -l nl
 
 Enter your email address and press enter. Now edit the `po/LINGUAS` file and add a new line containing the abbreviated name of the new language (`nl`).
 
-Finally, open the file `po/nl.po`, translate the two strings above, et voila. All you have to do now is to commit your changes. 
+Finally, open the file `po/nl.po` and translate the two strings above. All you have to do now is to commit your changes.
+
+For any issue, [drop me a message][1].
+
+
+[1]: https://github.com/madmurphy/nautilus-bluetooth/issues

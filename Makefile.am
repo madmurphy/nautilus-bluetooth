@@ -20,7 +20,6 @@ EXTRA_DIST = \
 	README.md \
 	autogen.sh \
 	package.json \
-	m4/ChangeLog \
 	$(INTLTOOL_FILES)
 
 DISTCLEANFILES = \

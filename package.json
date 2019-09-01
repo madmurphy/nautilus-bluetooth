@@ -1,8 +1,8 @@
 {
 	"name": "nautilus-bluetooth",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A simple Nautilus extension that adds a \"Send via Bluetooth\" entry to Nautilus' right-click menu",
-	"homepage": "https://madmurphy.github.io/nautilus-bluetooth/",
+	"homepage": "https://github.com/madmurphy/nautilus-bluetooth",
 	"author": "madmurphy333@gmail.com",
 	"license": "GPL-3.0",
 	"main": "nautilus-bluetooth",
