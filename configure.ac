@@ -6,17 +6,17 @@ dnl  A U T O C O N F   E N V I R O N M E N T
 dnl  ***************************************************************************
 
 
-AC_INIT([nautilus-bluetooth], [0.1])
+AC_PREREQ([2.69])
 
-AC_CONFIG_HEADERS([config.h])
+AC_INIT([nautilus-bluetooth], [0.1])
 
 AM_INIT_AUTOMAKE([1.11])
 
 AM_SILENT_RULES([yes])
 
-AC_PREREQ([2.69])
-
 AC_CONFIG_SRCDIR([src/nautilus-bluetooth.c])
+
+AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -29,12 +29,6 @@ AC_PROG_CC
 AC_PROG_INSTALL
 
 AC_PROG_MAKE_SET
-
-AC_FUNC_FORK
-
-AC_TYPE_PID_T
-
-AC_TYPE_SIZE_T
 
 PKG_CHECK_MODULES([NAUTILUS_BLUETOOTH], [glib-2.0 libnautilus-extension])
 
@@ -53,7 +47,7 @@ dnl  BLUETOOTH_SENDTO argument variable
 AC_DEFUN([DEFAULT_BLUETOOTH_SENDTO_PROG], [bluetooth-sendto])
 
 dnl  Register the BLUETOOTH_SENDTO argument variable...
-AC_ARG_VAR([BLUETOOTH_SENDTO], [Bluetooth file sharing command; it must support the syntax BLUETOOTH_SENDTO file1 file2 file3 ... etc. @<:@default=/usr/bin/]DEFAULT_BLUETOOTH_SENDTO_PROG[@:>@])
+AC_ARG_VAR([BLUETOOTH_SENDTO], [Bluetooth file sharing command; it must support the syntax BLUETOOTH_SENDTO file1 file2 file3 ... etc. @<:@default=BINDIR/]DEFAULT_BLUETOOTH_SENDTO_PROG[@:>@])
 
 dnl  First check whether a BLUETOOTH_SENDTO argument variable has been given; if
 dnl  not, check whether DEFAULT_BLUETOOTH_SENDTO_PROG is present in the system;

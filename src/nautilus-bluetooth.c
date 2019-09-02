@@ -36,14 +36,10 @@
 
 /*
 
-	GLOBAL VARIABLES
+	GLOBAL TYPES AND VARIABLES
 
 */
 
-
-static GType provider_types[1];
-static GType nautilus_bluetooth_type;
-static GObjectClass * parent_class;
 
 typedef struct {
 	GObject parent_slot;
@@ -52,6 +48,10 @@ typedef struct {
 typedef struct {
 	GObjectClass parent_slot;
 } NautilusBluetoothClass;
+
+static GType provider_types[1];
+static GType nautilus_bluetooth_type;
+static GObjectClass * parent_class;
 
 
 
@@ -67,50 +67,31 @@ static void nautilus_bluetooth_sendto (
 	gpointer user_data
 ) {
 
-	GList * file_selection, * iter;
-
-	file_selection = g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
-
-	const guint argv_last = g_list_length(file_selection) + 1;
-	char ** argv = g_malloc((argv_last + 1) * sizeof(char *));
-	size_t idx = 1;
+	GList * file_selection = g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
+	const gsize argv_last = g_list_length(file_selection) + 1;
+	gchar ** argv = g_malloc((argv_last + 1) * sizeof(gchar *));
+	gsize idx = 1;
+	GError * spawnerr = NULL;
 
 	*argv = NAUTILUS_BLUETOOTH_SENDTO_CMD;
 	argv[argv_last] = NULL;
 
-	for (iter = file_selection; iter; iter = iter->next) {
+	for (GList * iter = file_selection; iter; iter = iter->next) {
 
 		argv[idx++] = nautilus_file_info_get_uri(NAUTILUS_FILE_INFO(iter->data));
 
 	}
 
-	const pid_t proc_id = fork();
+	if (!g_spawn_async(NULL, argv, NULL, 0, NULL, NULL, NULL, &spawnerr)) {
 
-	if (proc_id < 0) {
-
-		perror("fork");
-
-	} else if (proc_id > 0) {
-
-		/*  Parent  */
-
-		for (idx = 1; idx < argv_last; g_free(argv[idx++]));
-
-		g_free(argv);
-
-	} else {
-
-		/*  Child  */
-
-		if (execv(*argv, argv) == -1) {
-
-			perror("execv");
-
-		}
-
-		_exit(1);
+		fprintf(stderr, "%s\n", spawnerr->message);
+		g_error_free(spawnerr);
 
 	}
+
+	for (idx = 1; idx < argv_last; g_free(argv[idx++]));
+
+	g_free(argv);
 
 }
 
@@ -135,9 +116,7 @@ static GList * nautilus_bluetooth_get_file_items (
 	GList * file_selection
 ) {
 
-	GList * iter;
-
-	for (iter = file_selection; iter; iter = iter->next) {
+	for (GList * iter = file_selection; iter; iter = iter->next) {
 
 		/*  Avoid directories  */
 
@@ -150,7 +129,7 @@ static GList * nautilus_bluetooth_get_file_items (
 	}
 
 	NautilusMenuItem * menu_item = nautilus_menu_item_new(
-		"NautilusBluetooth::sendto_bluetooth",
+		"NautilusBluetooth::send_to_bluetooth",
 		_("Send via Bluetooth"),
 		_("Send the selected files to a Bluetooth device"),
 		"bluetooth"
@@ -200,7 +179,7 @@ static void nautilus_bluetooth_register_type (GTypeModule * module) {
 
 	static const GInterfaceInfo menu_provider_iface_info = {
 		(GInterfaceInitFunc) nautilus_bluetooth_menu_provider_iface_init,
-		NULL,
+		(GInterfaceFinalizeFunc) NULL,
 		NULL
 	};
 
@@ -222,12 +201,10 @@ static void nautilus_bluetooth_register_type (GTypeModule * module) {
 }
 
 
-void nautilus_module_initialize (GTypeModule  * module) {
+void nautilus_module_initialize (GTypeModule * module) {
 
 	#ifdef ENABLE_NLS
-
 	bindtextdomain(GETTEXT_PACKAGE, NAUTILUS_BLUETOOTH_LOCALEDIR);
-
 	#endif
 
 	nautilus_bluetooth_register_type(module);
