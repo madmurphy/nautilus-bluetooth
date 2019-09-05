@@ -29,8 +29,13 @@
 #endif
 
 #include <glib.h>
-#include <glib/gi18n-lib.h>
 #include <nautilus-extension.h>
+
+#ifdef ENABLE_NLS
+#include <glib/gi18n-lib.h>
+#else
+#define _(STRING) STRING
+#endif
 
 
 
@@ -63,13 +68,13 @@ static GObjectClass * parent_class;
 
 
 static void nautilus_bluetooth_sendto (
-	NautilusMenuItem * menu_item,
+	NautilusMenuItem * const menu_item,
 	gpointer user_data
 ) {
 
-	GList * file_selection = g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
+	GList * const file_selection = g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
 	const gsize argv_last = g_list_length(file_selection) + 1;
-	gchar ** argv = g_malloc((argv_last + 1) * sizeof(gchar *));
+	gchar ** const argv = g_malloc((argv_last + 1) * sizeof(gchar *));
 	gsize idx = 1;
 	GError * spawnerr = NULL;
 
@@ -103,7 +108,10 @@ GType nautilus_bluetooth_get_type (void) {
 }
 
 
-static void nautilus_bluetooth_class_init (NautilusBluetoothClass * nautilus_bluetooth_class, gpointer class_data) {
+static void nautilus_bluetooth_class_init (
+	NautilusBluetoothClass * const nautilus_bluetooth_class,
+	gpointer class_data
+) {
 
 	parent_class = g_type_class_peek_parent(nautilus_bluetooth_class);
 
@@ -111,9 +119,9 @@ static void nautilus_bluetooth_class_init (NautilusBluetoothClass * nautilus_blu
 
 
 static GList * nautilus_bluetooth_get_file_items (
-	NautilusMenuProvider * provider,
-	GtkWidget * window,
-	GList * file_selection
+	NautilusMenuProvider * const provider,
+	GtkWidget * const window,
+	GList * const file_selection
 ) {
 
 	for (GList * iter = file_selection; iter; iter = iter->next) {
@@ -128,8 +136,8 @@ static GList * nautilus_bluetooth_get_file_items (
 
 	}
 
-	NautilusMenuItem * menu_item = nautilus_menu_item_new(
-		"NautilusBluetooth::send_to_bluetooth",
+	NautilusMenuItem * const menu_item = nautilus_menu_item_new(
+		"NautilusBluetooth::send_via_bluetooth",
 		_("Send via Bluetooth"),
 		_("Send the selected files to a Bluetooth device"),
 		"bluetooth"
@@ -154,7 +162,7 @@ static GList * nautilus_bluetooth_get_file_items (
 
 
 static void nautilus_bluetooth_menu_provider_iface_init (
-	NautilusMenuProviderIface * iface,
+	NautilusMenuProviderIface * const iface,
 	gpointer iface_data
 ) {
 
@@ -163,7 +171,7 @@ static void nautilus_bluetooth_menu_provider_iface_init (
 }
 
 
-static void nautilus_bluetooth_register_type (GTypeModule * module) {
+static void nautilus_bluetooth_register_type (GTypeModule * const module) {
 
 	static const GTypeInfo info = {
 		sizeof(NautilusBluetoothClass),
@@ -201,7 +209,7 @@ static void nautilus_bluetooth_register_type (GTypeModule * module) {
 }
 
 
-void nautilus_module_initialize (GTypeModule * module) {
+void nautilus_module_initialize (GTypeModule * const module) {
 
 	#ifdef ENABLE_NLS
 	bindtextdomain(GETTEXT_PACKAGE, NAUTILUS_BLUETOOTH_LOCALEDIR);

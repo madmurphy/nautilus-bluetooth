@@ -26,10 +26,6 @@ po/Makefile.in])
 
 AC_PROG_CC
 
-AC_PROG_INSTALL
-
-AC_PROG_MAKE_SET
-
 PKG_CHECK_MODULES([NAUTILUS_BLUETOOTH], [glib-2.0 libnautilus-extension])
 
 AC_CHECK_PROG([HAVE_PKGCONFIG], [pkg-config], [yes], [no])
@@ -67,13 +63,14 @@ dnl  ***************************************************************************
 
 IT_PROG_INTLTOOL([0.35.0])
 
-AC_SUBST([GETTEXT_PACKAGE], ['nautilus-bluetooth'])
+AM_CONDITIONAL([NLS_ENABLED], [test "x${USE_NLS}" != xno])
 
-AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [GETTEXT package name])
+AM_COND_IF([NLS_ENABLED],
+	[AC_SUBST([GETTEXT_PACKAGE], AC_PACKAGE_NAME)
+	AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["${GETTEXT_PACKAGE}"], [GETTEXT package name])
+	AM_GLIB_GNU_GETTEXT
+	AM_GLIB_DEFINE_LOCALEDIR([NAUTILUS_BLUETOOTH_LOCALEDIR])])
 
-AM_GLIB_GNU_GETTEXT
-
-AM_GLIB_DEFINE_LOCALEDIR([NAUTILUS_BLUETOOTH_LOCALEDIR])
 
 
 dnl  ***************************************************************************
