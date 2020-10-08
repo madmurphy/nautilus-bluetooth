@@ -1,12 +1,15 @@
 INSTALL
 =======
 
-On most Unix-like systems, you should be able to install **nautilus-bluetooth**
-using the following common steps:
+On most Unix-like systems, you should be able to install this package using the
+following common steps:
 
     ./configure
     make
-    make install
+    make install-strip
+
+If the `strip` utility is not available on your machine, use `make install`
+instead (it will produce larger binaries).
 
 If you need to customize the target directories, or otherwise adjust the build
 setting, use
@@ -16,6 +19,7 @@ setting, use
 to list the configure options.
 
 If the `configure` script is missing from your package you need to create it by
-running the `autogen.sh` script. Use the `--noconfigure` parameter in order to
-prevent `autogen.sh` from running automatically `configure` immediately after
-having generated it. To list different options use `autogen.sh --help`.
+running the `bootstrap` script. Use the `--noconfigure` parameter in order to
+prevent `bootstrap` from running automatically `configure` immediately after
+having generated it. To list different options use `bootstrap --help`.
+

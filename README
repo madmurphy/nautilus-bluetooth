@@ -1,4 +1,4 @@
-nautilus-bluetooth
+Nautilus Bluetooth
 ==================
 
 A simple Nautilus extension written in C that adds a “Send via Bluetooth” entry
@@ -17,16 +17,19 @@ package comes with only two strings to translate:
 1. “Send via Bluetooth”
 2. “Send the selected files to a Bluetooth device”
 
-First thing to do is to make sure that `gettext` is installed in your system.
-Then clone this repository and launch the following two commands:
+First thing to do is to make sure that `gettext` and `intltool` are installed
+on your system. Then clone this repository and launch the following four
+commands:
 
 ```
 cd nautilus-bluetooth/po
+intltool-update -p
 msginit -l nl
+rm nautilus-bluetooth.pot
 ```
 
-Enter your email address and press enter. Now edit the `po/LINGUAS` file and add
-a new line containing the abbreviated name of the new language (`nl`).
+Now edit the `po/LINGUAS` file and add a new line containing the abbreviated
+name of the new language (`nl`).
 
 Finally, open the file `po/nl.po` and translate the two strings above. All you
 have to do now is to commit your changes.
@@ -34,5 +37,5 @@ have to do now is to commit your changes.
 For any issue, [drop me a message][1].
 
 
-[1]: https://github.com/madmurphy/nautilus-bluetooth/issues
+[1]: https://gitlab.gnome.org/madmurphy/nautilus-bluetooth/issues
 

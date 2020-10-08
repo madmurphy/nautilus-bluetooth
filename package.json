@@ -1,11 +1,10 @@
 {
 	"name": "nautilus-bluetooth",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "A simple Nautilus extension that adds a \"Send via Bluetooth\" entry to Nautilus' right-click menu",
 	"homepage": "https://gitlab.gnome.org/madmurphy/nautilus-bluetooth",
 	"author": "madmurphy333@gmail.com",
-	"license": "GPL-3.0",
-	"main": "nautilus-bluetooth",
+	"license": "GPL-3.0-or-later",
 	"repository": {
 		"type": "git",
 		"url": "https://gitlab.gnome.org/madmurphy/nautilus-bluetooth.git"

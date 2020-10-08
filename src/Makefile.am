@@ -18,7 +18,7 @@ AM_CFLAGS = \
 nautilus_extensiondir = $(NAUTILUS_EXTENSION_DIR)
 
 nautilus_extension_LTLIBRARIES = \
-	libnautilus_bluetooth.la
+	libnautilus-bluetooth.la
 
 libnautilus_bluetooth_la_SOURCES = \
 	nautilus-bluetooth.c

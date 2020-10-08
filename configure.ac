@@ -8,7 +8,7 @@ dnl  ***************************************************************************
 
 AC_PREREQ([2.69])
 
-AC_INIT([nautilus-bluetooth], [0.1])
+AC_INIT([nautilus-bluetooth], [0.1.5], [madmurphy333@gmail.com], [nautilus-bluetooth], [https://gitlab.gnome.org/madmurphy/nautilus-bluetooth])
 
 AC_CONFIG_MACRO_DIR([m4])
 

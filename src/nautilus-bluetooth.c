@@ -4,7 +4,7 @@
 |*|
 |*|	nautilus-bluetooth.c
 |*|
-|*|	https://github.com/madmurphy/nautilus-bluetooth
+|*|	https://gitlab.gnome.org/madmurphy/nautilus-bluetooth
 |*|	Copyright (C) 2019 Stefano Gioffr&eacute; <madmurphy333@gmail.com>
 |*|
 |*|	nautilus-bluetooth is free software: you can redistribute it and/or modify it
@@ -87,7 +87,7 @@ static void nautilus_bluetooth_sendto (
 
 	}
 
-	if (!g_spawn_async(NULL, argv, NULL, 0, NULL, NULL, NULL, &spawnerr)) {
+	if (!g_spawn_async(NULL, argv, NULL, G_SPAWN_DEFAULT, NULL, NULL, NULL, &spawnerr)) {
 
 		fprintf(stderr, "%s\n", spawnerr->message);
 		g_error_free(spawnerr);
