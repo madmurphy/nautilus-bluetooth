@@ -69,7 +69,7 @@ static GObjectClass * parent_class;
 
 static void nautilus_bluetooth_sendto (
 	NautilusMenuItem * const menu_item,
-	gpointer user_data
+	gpointer v_unused
 ) {
 
 	GList * const file_selection = g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
@@ -147,7 +147,7 @@ static GList * nautilus_bluetooth_get_file_items (
 		menu_item,
 		"activate",
 		G_CALLBACK(nautilus_bluetooth_sendto),
-		provider
+		NULL
 	);
 
 	g_object_set_data_full(

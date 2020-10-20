@@ -2,8 +2,14 @@ Change Log
 ==========
 
 
-0.1.5
------
+## 0.1.6
+
+Changes:
+
+* Use `--disable-static` as the default `configure` option
+
+
+## 0.1.5
 
 Changes:
 
@@ -11,40 +17,35 @@ Changes:
 * General package maintenance
 
 
-0.1.4
------
+## 0.1.4
 
 Changes:
 
 * Updated building environment
 
 
-0.1.3
------
+## 0.1.3
 
 Changes:
 
 * Code review
 
 
-0.1.2
------
+## 0.1.2
 
 Changes:
 
 * Code review
 
 
-0.1.1
------
+## 0.1.1
 
 Changes:
 
 * Added German translation
 
 
-0.1.0
------
+## 0.1.0
 
 **Nautilus Bluetooth** has been published.
 

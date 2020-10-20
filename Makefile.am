@@ -1,8 +1,10 @@
 # Process this file with automake to produce Makefile.in
 
+
+ACLOCAL_AMFLAGS = -I m4
+
 SUBDIRS = \
 	src
-
 
 dist_doc_DATA = \
 	AUTHORS \
@@ -11,22 +13,19 @@ dist_doc_DATA = \
 	NEWS \
 	README
 
-
 INTLTOOL_FILES = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
-
 
 EXTRA_DIST = \
 	ChangeLog.md \
 	INSTALL \
 	NEWS \
 	README.md \
-	autogen.sh \
+	bootstrap \
 	package.json \
 	$(INTLTOOL_FILES)
-
 
 DISTCLEANFILES = \
 	intltool-extract \
@@ -40,20 +39,18 @@ if NLS_ENABLED
 SUBDIRS += \
 	po
 
-else
+else !NLS_ENABLED
 
 EXTRA_DIST += \
 	po
 
-endif
+endif !NLS_ENABLED
 
 
 # Remove doc directory on uninstall
 uninstall-local:
 	-rm -r '$(DESTDIR)$(docdir)'
 
-
-ACLOCAL_AMFLAGS = -I m4
 
 # EOF
 

@@ -8,7 +8,11 @@ dnl  ***************************************************************************
 
 AC_PREREQ([2.69])
 
-AC_INIT([nautilus-bluetooth], [0.1.5], [madmurphy333@gmail.com], [nautilus-bluetooth], [https://gitlab.gnome.org/madmurphy/nautilus-bluetooth])
+AC_INIT([Nautilus Bluetooth],
+	[0.1.6],
+	[madmurphy333@gmail.com],
+	[nautilus-bluetooth],
+	[https://gitlab.gnome.org/madmurphy/nautilus-bluetooth])
 
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -68,7 +72,7 @@ IT_PROG_INTLTOOL([0.35.0])
 AM_CONDITIONAL([NLS_ENABLED], [test "x${USE_NLS}" != xno])
 
 AM_COND_IF([NLS_ENABLED],
-	[AC_SUBST([GETTEXT_PACKAGE], AC_PACKAGE_NAME)
+	[AC_SUBST([GETTEXT_PACKAGE], AC_PACKAGE_TARNAME)
 	AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["${GETTEXT_PACKAGE}"], [GETTEXT package name])
 	AM_GLIB_GNU_GETTEXT
 	AM_GLIB_DEFINE_LOCALEDIR([NAUTILUS_BLUETOOTH_LOCALEDIR])])
@@ -82,7 +86,7 @@ dnl  ***************************************************************************
 
 AC_SUBST([NAUTILUS_EXTENSION_DIR], [$($PKG_CONFIG --variable=extensiondir libnautilus-extension)])
 
-LT_INIT
+LT_INIT([disable-static])
 
 AC_OUTPUT
 
