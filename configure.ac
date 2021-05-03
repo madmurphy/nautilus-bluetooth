@@ -9,7 +9,7 @@ dnl  ***************************************************************************
 AC_PREREQ([2.69])
 
 AC_INIT([Nautilus Bluetooth],
-	[0.1.6],
+	[1.0.0],
 	[madmurphy333@gmail.com],
 	[nautilus-bluetooth],
 	[https://gitlab.gnome.org/madmurphy/nautilus-bluetooth])
@@ -36,7 +36,8 @@ PKG_CHECK_MODULES([NAUTILUS_BLUETOOTH], [glib-2.0 libnautilus-extension])
 
 AC_CHECK_PROG([HAVE_PKGCONFIG], [pkg-config], [yes], [no])
 
-AS_IF([test "x${HAVE_PKGCONFIG}" = xno], [AC_MSG_ERROR([you need to have pkgconfig installed!])])
+AS_IF([test "x${HAVE_PKGCONFIG}" = xno],
+	[AC_MSG_ERROR([you need to have pkgconfig installed!])])
 
 
 dnl  ***************************************************************************
@@ -49,17 +50,24 @@ dnl  BLUETOOTH_SENDTO argument variable
 AC_DEFUN([DEFAULT_BLUETOOTH_SENDTO_PROG], [bluetooth-sendto])
 
 dnl  Register the BLUETOOTH_SENDTO argument variable...
-AC_ARG_VAR([BLUETOOTH_SENDTO], [Bluetooth file sharing command; it must support the syntax BLUETOOTH_SENDTO file1 file2 file3 ... etc. @<:@default=BINDIR/]DEFAULT_BLUETOOTH_SENDTO_PROG[@:>@])
+AC_ARG_VAR([BLUETOOTH_SENDTO],
+	[Bluetooth file sharing command; it must support the syntax BLUETOOTH_SENDTO file1 file2 file3 ... etc. @<:@default=BINDIR/]DEFAULT_BLUETOOTH_SENDTO_PROG[@:>@])
 
 dnl  First check whether a BLUETOOTH_SENDTO argument variable has been given; if
 dnl  not, check whether DEFAULT_BLUETOOTH_SENDTO_PROG is present in the system;
 dnl  if not, print an error message and stop configuring.
-AS_IF([test "x${BLUETOOTH_SENDTO}" = x],
-	[AC_PATH_PROG([AUTO_BLUETOOTH_SENDTO_CMD], DEFAULT_BLUETOOTH_SENDTO_PROG)
+AS_IF([test "x${BLUETOOTH_SENDTO}" = x], [
+	AC_PATH_PROG([AUTO_BLUETOOTH_SENDTO_CMD], DEFAULT_BLUETOOTH_SENDTO_PROG)
 	AS_IF([test "x${AUTO_BLUETOOTH_SENDTO_CMD}" = x],
 		[AC_MSG_ERROR(DEFAULT_BLUETOOTH_SENDTO_PROG[ utility not found. Please specify a BLUETOOTH_SENDTO argument variable before launching this configure script. For more information see ./configure --help])],
-		[AC_DEFINE_UNQUOTED([NAUTILUS_BLUETOOTH_SENDTO_CMD], ["${AUTO_BLUETOOTH_SENDTO_CMD}"], [Command invoked to send files via Bluetooth])])],
-	[AC_DEFINE_UNQUOTED([NAUTILUS_BLUETOOTH_SENDTO_CMD], ["${BLUETOOTH_SENDTO}"], [Command invoked to send files via Bluetooth])])
+		[AC_DEFINE_UNQUOTED([NAUTILUS_BLUETOOTH_SENDTO_CMD],
+			["${AUTO_BLUETOOTH_SENDTO_CMD}"],
+			[Command invoked to send files via Bluetooth])])
+], [
+	AC_DEFINE_UNQUOTED([NAUTILUS_BLUETOOTH_SENDTO_CMD],
+		["${BLUETOOTH_SENDTO}"],
+		[Command invoked to send files via Bluetooth])
+])
 
 
 dnl  ***************************************************************************
@@ -71,11 +79,13 @@ IT_PROG_INTLTOOL([0.35.0])
 
 AM_CONDITIONAL([NLS_ENABLED], [test "x${USE_NLS}" != xno])
 
-AM_COND_IF([NLS_ENABLED],
-	[AC_SUBST([GETTEXT_PACKAGE], AC_PACKAGE_TARNAME)
-	AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["${GETTEXT_PACKAGE}"], [GETTEXT package name])
+AM_COND_IF([NLS_ENABLED], [
+	AC_SUBST([GETTEXT_PACKAGE], AC_PACKAGE_TARNAME)
+	AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],
+		["${GETTEXT_PACKAGE}"], [GETTEXT package name])
 	AM_GLIB_GNU_GETTEXT
-	AM_GLIB_DEFINE_LOCALEDIR([NAUTILUS_BLUETOOTH_LOCALEDIR])])
+	AM_GLIB_DEFINE_LOCALEDIR([NAUTILUS_BLUETOOTH_LOCALEDIR])
+])
 
 
 
@@ -84,7 +94,8 @@ dnl     F I N A L I Z A T I O N
 dnl  ***************************************************************************
 
 
-AC_SUBST([NAUTILUS_EXTENSION_DIR], [$($PKG_CONFIG --variable=extensiondir libnautilus-extension)])
+AC_SUBST([NAUTILUS_EXTENSION_DIR],
+	["$($PKG_CONFIG --variable=extensiondir libnautilus-extension)"])
 
 LT_INIT([disable-static])
 

@@ -1,24 +1,26 @@
 /*  -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
+/*  Please make sure that the TAB width in your editor is set to 4 spaces  */
 
 /*\
 |*|
-|*|	nautilus-bluetooth.c
+|*| nautilus-bluetooth.c
 |*|
-|*|	https://gitlab.gnome.org/madmurphy/nautilus-bluetooth
-|*|	Copyright (C) 2019 Stefano Gioffr&eacute; <madmurphy333@gmail.com>
+|*| https://gitlab.gnome.org/madmurphy/nautilus-bluetooth
 |*|
-|*|	nautilus-bluetooth is free software: you can redistribute it and/or modify it
-|*|	under the terms of the GNU General Public License as published by the
-|*|	Free Software Foundation, either version 3 of the License, or
-|*|	(at your option) any later version.
+|*| Copyright (C) 2019 <madmurphy333@gmail.com>
 |*|
-|*|	nautilus-bluetooth is distributed in the hope that it will be useful, but
-|*|	WITHOUT ANY WARRANTY; without even the implied warranty of
-|*|	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-|*|	See the GNU General Public License for more details.
+|*| **Nautilus Bluetooth** is free software: you can redistribute it and/or
+|*| modify it under the terms of the GNU General Public License as published
+|*| by the Free Software Foundation, either version 3 of the License, or (at
+|*| your option) any later version.
 |*|
-|*|	You should have received a copy of the GNU General Public License along
-|*|	with this program. If not, see <http://www.gnu.org/licenses/>.
+|*| **Nautilus Bluetooth** is distributed in the hope that it will be useful,
+|*| but WITHOUT ANY WARRANTY; without even the implied warranty of
+|*| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+|*| Public License for more details.
+|*|
+|*| You should have received a copy of the GNU General Public License along
+|*| with this program. If not, see <http://www.gnu.org/licenses/>.
 |*|
 \*/
 
@@ -33,17 +35,20 @@
 
 #ifdef ENABLE_NLS
 #include <glib/gi18n-lib.h>
+#define I18N_INIT() \
+	bindtextdomain(GETTEXT_PACKAGE, NAUTILUS_BLUETOOTH_LOCALEDIR)
 #else
 #define _(STRING) STRING
+#define I18N_INIT()
 #endif
 
 
 
-/*
-
-	GLOBAL TYPES AND VARIABLES
-
-*/
+/*\
+|*|
+|*|	GLOBAL TYPES AND VARIABLES
+|*|
+\*/
 
 
 typedef struct {
@@ -60,11 +65,11 @@ static GObjectClass * parent_class;
 
 
 
-/*
-
-	FUNCTIONS
-
-*/
+/*\
+|*|
+|*|	FUNCTIONS
+|*|
+\*/
 
 
 static void nautilus_bluetooth_sendto (
@@ -72,8 +77,9 @@ static void nautilus_bluetooth_sendto (
 	gpointer v_unused
 ) {
 
-	GList * const file_selection = g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
-	const gsize argv_last = g_list_length(file_selection) + 1;
+	GList * const file_selection =
+		g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
+	const guint argv_last = g_list_length(file_selection) + 1;
 	gchar ** const argv = g_malloc((argv_last + 1) * sizeof(gchar *));
 	gsize idx = 1;
 	GError * spawnerr = NULL;
@@ -87,7 +93,18 @@ static void nautilus_bluetooth_sendto (
 
 	}
 
-	if (!g_spawn_async(NULL, argv, NULL, G_SPAWN_DEFAULT, NULL, NULL, NULL, &spawnerr)) {
+	if (
+		!g_spawn_async(
+			NULL,
+			argv,
+			NULL,
+			G_SPAWN_DEFAULT,
+			NULL,
+			NULL,
+			NULL,
+			&spawnerr
+		)
+	) {
 
 		fprintf(stderr, "%s\n", spawnerr->message);
 		g_error_free(spawnerr);
@@ -97,23 +114,6 @@ static void nautilus_bluetooth_sendto (
 	for (idx = 1; idx < argv_last; g_free(argv[idx++]));
 
 	g_free(argv);
-
-}
-
-
-GType nautilus_bluetooth_get_type (void) {
-
-	return nautilus_bluetooth_type;
-
-}
-
-
-static void nautilus_bluetooth_class_init (
-	NautilusBluetoothClass * const nautilus_bluetooth_class,
-	gpointer class_data
-) {
-
-	parent_class = g_type_class_peek_parent(nautilus_bluetooth_class);
 
 }
 
@@ -151,7 +151,8 @@ static GList * nautilus_bluetooth_get_file_items (
 	);
 
 	g_object_set_data_full(
-		(GObject *) menu_item, "nautilus_bluetooth_files",
+		(GObject *) menu_item,
+		"nautilus_bluetooth_files",
 		nautilus_file_info_list_copy(file_selection),
 		(GDestroyNotify) nautilus_file_info_list_free
 	);
@@ -163,7 +164,7 @@ static GList * nautilus_bluetooth_get_file_items (
 
 static void nautilus_bluetooth_menu_provider_iface_init (
 	NautilusMenuProviderIface * const iface,
-	gpointer iface_data
+	gpointer const iface_data
 ) {
 
 	iface->get_file_items = nautilus_bluetooth_get_file_items;
@@ -171,7 +172,19 @@ static void nautilus_bluetooth_menu_provider_iface_init (
 }
 
 
-static void nautilus_bluetooth_register_type (GTypeModule * const module) {
+static void nautilus_bluetooth_class_init (
+	NautilusBluetoothClass * const nautilus_bluetooth_class,
+	gpointer class_data
+) {
+
+	parent_class = g_type_class_peek_parent(nautilus_bluetooth_class);
+
+}
+
+
+static void nautilus_bluetooth_register_type (
+	GTypeModule * const module
+) {
 
 	static const GTypeInfo info = {
 		sizeof(NautilusBluetoothClass),
@@ -183,6 +196,7 @@ static void nautilus_bluetooth_register_type (GTypeModule * const module) {
 		sizeof(NautilusBluetooth),
 		0,
 		(GInstanceInitFunc) NULL,
+		(GTypeValueTable * ) NULL
 	};
 
 	static const GInterfaceInfo menu_provider_iface_info = {
@@ -209,12 +223,18 @@ static void nautilus_bluetooth_register_type (GTypeModule * const module) {
 }
 
 
-void nautilus_module_initialize (GTypeModule * const module) {
+GType nautilus_bluetooth_get_type (void) {
 
-	#ifdef ENABLE_NLS
-	bindtextdomain(GETTEXT_PACKAGE, NAUTILUS_BLUETOOTH_LOCALEDIR);
-	#endif
+	return nautilus_bluetooth_type;
 
+}
+
+
+void nautilus_module_initialize (
+	GTypeModule * const module
+) {
+
+	I18N_INIT();
 	nautilus_bluetooth_register_type(module);
 	*provider_types = nautilus_bluetooth_get_type();
 
@@ -228,7 +248,9 @@ void nautilus_module_shutdown (void) {
 }
 
 
-void nautilus_module_list_types (const GType ** types, int * num_types) {
+void nautilus_module_list_types (
+	const GType ** const types,
+	int * const num_types) {
 
 	*types = provider_types;
 	*num_types = G_N_ELEMENTS(provider_types);

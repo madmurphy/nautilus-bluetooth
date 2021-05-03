@@ -25,7 +25,7 @@ commands:
 cd nautilus-bluetooth/po
 intltool-update -p
 msginit -l nl
-rm nautilus-bluetooth.pot
+rm NautilusBluetooth.pot
 ```
 
 Now edit the `po/LINGUAS` file and add a new line containing the abbreviated
@@ -33,6 +33,16 @@ name of the new language (`nl`).
 
 Finally, open the file `po/nl.po` and translate the two strings above. All you
 have to do now is to commit your changes.
+
+If you want to update an existing Dutch translation to the most recent changes
+in the extension source code, launch
+
+``` sh
+cd nautilus-bluetooth/po
+intltool-update -p
+mv nl.po nl.po.bak && msgmerge nl.po.bak NautilusBluetooth.pot > nl.po
+rm NautilusBluetooth.pot nl.po.bak
+```
 
 For any issue, [drop me a message][1].
 

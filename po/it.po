@@ -1,12 +1,13 @@
 # Italian translations for nautilus-bluetooth package.
-# Copyright (C) 2019 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the nautilus-bluetooth package.
+# Copyright (C) 2019 <madmurphy333@gmail.com>
+# This file is distributed under the same license as the nautilus-bluetooth
+# package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 1.0.0\n"
+"Report-Msgid-Bugs-To: <madmurphy333@gmail.com>\n"
 "POT-Creation-Date: 2019-09-05 19:47+0100\n"
 "PO-Revision-Date: 2019-08-26 17:05+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
