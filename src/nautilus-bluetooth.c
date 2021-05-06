@@ -77,8 +77,11 @@ static void nautilus_bluetooth_sendto (
 	gpointer v_unused
 ) {
 
-	GList * const file_selection =
-		g_object_get_data((GObject *) menu_item, "nautilus_bluetooth_files");
+	GList * const file_selection = g_object_get_data(
+		G_OBJECT(menu_item),
+		"nautilus_bluetooth_files"
+	);
+
 	const guint argv_last = g_list_length(file_selection) + 1;
 	gchar ** const argv = g_malloc((argv_last + 1) * sizeof(gchar *));
 	gsize idx = 1;
@@ -89,7 +92,9 @@ static void nautilus_bluetooth_sendto (
 
 	for (GList * iter = file_selection; iter; iter = iter->next) {
 
-		argv[idx++] = nautilus_file_info_get_uri(NAUTILUS_FILE_INFO(iter->data));
+		argv[idx++] = nautilus_file_info_get_uri(
+			NAUTILUS_FILE_INFO(iter->data)
+		);
 
 	}
 
@@ -106,8 +111,8 @@ static void nautilus_bluetooth_sendto (
 		)
 	) {
 
-		fprintf(stderr, "%s\n", spawnerr->message);
-		g_error_free(spawnerr);
+		fprintf(stderr, "Nautilus Bluetooth: %s\n", spawnerr->message);
+		g_clear_error(&spawnerr);
 
 	}
 
@@ -137,7 +142,7 @@ static GList * nautilus_bluetooth_get_file_items (
 	}
 
 	NautilusMenuItem * const menu_item = nautilus_menu_item_new(
-		"NautilusBluetooth::send_via_bluetooth",
+		"NautilusBluetooth::send",
 		_("Send via Bluetooth"),
 		_("Send the selected files to a Bluetooth device"),
 		"bluetooth"
@@ -151,7 +156,7 @@ static GList * nautilus_bluetooth_get_file_items (
 	);
 
 	g_object_set_data_full(
-		(GObject *) menu_item,
+		G_OBJECT(menu_item),
 		"nautilus_bluetooth_files",
 		nautilus_file_info_list_copy(file_selection),
 		(GDestroyNotify) nautilus_file_info_list_free
@@ -196,7 +201,7 @@ static void nautilus_bluetooth_register_type (
 		sizeof(NautilusBluetooth),
 		0,
 		(GInstanceInitFunc) NULL,
-		(GTypeValueTable * ) NULL
+		(GTypeValueTable *) NULL
 	};
 
 	static const GInterfaceInfo menu_provider_iface_info = {

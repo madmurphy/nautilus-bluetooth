@@ -2,6 +2,13 @@ Change Log
 ==========
 
 
+## 1.0.1
+
+Changes:
+
+* Error messages have been marked with a label (`"Nautilus Bluetooth"`)
+
+
 ## 1.0.0
 
 Changes:

@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.0\n"
+"Project-Id-Version: 1.0.1\n"
 "Report-Msgid-Bugs-To: <madmurphy333@gmail.com>\n"
 "POT-Creation-Date: 2019-09-05 19:47+0100\n"
 "PO-Revision-Date: 2019-08-28 13:59+0100\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../src/nautilus-bluetooth.c:141
+#: ../src/nautilus-bluetooth.c:146
 msgid "Send via Bluetooth"
 msgstr "Envoyer via Bluetooth"
 
-#: ../src/nautilus-bluetooth.c:142
+#: ../src/nautilus-bluetooth.c:147
 msgid "Send the selected files to a Bluetooth device"
 msgstr "Envoyer les fichiers sélectionnés à un périphérique Bluetooth"
