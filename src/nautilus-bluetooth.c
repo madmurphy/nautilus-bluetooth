@@ -33,6 +33,15 @@
 #include <glib.h>
 #include <nautilus-extension.h>
 
+
+
+/*\
+|*|
+|*| BUILD SETTINGS
+|*|
+\*/
+
+
 #ifdef ENABLE_NLS
 #include <glib/gi18n-lib.h>
 #define I18N_INIT() \
@@ -46,10 +55,15 @@
 
 /*\
 |*|
-|*|	GLOBAL TYPES AND VARIABLES
+|*| GLOBAL TYPES AND VARIABLES
 |*|
 \*/
 
+
+#ifdef G_LOG_DOMAIN
+#undef G_LOG_DOMAIN
+#endif
+#define G_LOG_DOMAIN "Nautilus-Bluetooth"
 
 typedef struct {
 	GObject parent_slot;
@@ -67,7 +81,7 @@ static GObjectClass * parent_class;
 
 /*\
 |*|
-|*|	FUNCTIONS
+|*| FUNCTIONS
 |*|
 \*/
 
@@ -111,7 +125,7 @@ static void nautilus_bluetooth_sendto (
 		)
 	) {
 
-		fprintf(stderr, "Nautilus Bluetooth: %s\n", spawnerr->message);
+		g_message("%s", spawnerr->message);
 		g_clear_error(&spawnerr);
 
 	}
@@ -235,17 +249,6 @@ GType nautilus_bluetooth_get_type (void) {
 }
 
 
-void nautilus_module_initialize (
-	GTypeModule * const module
-) {
-
-	I18N_INIT();
-	nautilus_bluetooth_register_type(module);
-	*provider_types = nautilus_bluetooth_get_type();
-
-}
-
-
 void nautilus_module_shutdown (void) {
 
 	/*  Any module-specific shutdown  */
@@ -255,10 +258,22 @@ void nautilus_module_shutdown (void) {
 
 void nautilus_module_list_types (
 	const GType ** const types,
-	int * const num_types) {
+	int * const num_types
+) {
 
 	*types = provider_types;
 	*num_types = G_N_ELEMENTS(provider_types);
+
+}
+
+
+void nautilus_module_initialize (
+	GTypeModule * const module
+) {
+
+	I18N_INIT();
+	nautilus_bluetooth_register_type(module);
+	*provider_types = nautilus_bluetooth_get_type();
 
 }
 

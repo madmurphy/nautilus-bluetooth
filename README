@@ -21,11 +21,11 @@ First thing to do is to make sure that `gettext` and `intltool` are installed
 on your system. Then clone this repository and launch the following four
 commands:
 
-```
+``` sh
 cd nautilus-bluetooth/po
-intltool-update -p
+intltool-update -p --gettext-package=nautilus-bluetooth
 msginit -l nl
-rm NautilusBluetooth.pot
+rm nautilus-bluetooth.pot
 ```
 
 Now edit the `po/LINGUAS` file and add a new line containing the abbreviated
@@ -39,9 +39,9 @@ in the extension source code, launch
 
 ``` sh
 cd nautilus-bluetooth/po
-intltool-update -p
-mv nl.po nl.po.bak && msgmerge nl.po.bak NautilusBluetooth.pot > nl.po
-rm NautilusBluetooth.pot nl.po.bak
+intltool-update -p --gettext-package=nautilus-bluetooth
+mv nl.po nl.po.bak && msgmerge nl.po.bak nautilus-bluetooth.pot > nl.po
+rm nautilus-bluetooth.pot nl.po.bak
 ```
 
 For any issue, [drop me a message][1].
@@ -57,9 +57,9 @@ generator.
 Free software
 -------------
 
-This extension is free software. You can redistribute it and/or modify it under
-the terms of the GPL license version 3 or any later version. See [COPYING][3]
-for details.
+**Nautilus Bluetooth** is free software. You can redistribute it and/or modify
+it under the terms of the GPL license version 3 or any later version. See
+[COPYING][3] for details.
 
 
   [1]: https://gitlab.gnome.org/madmurphy/nautilus-bluetooth/issues
