@@ -11,21 +11,21 @@ Get involved
 The package needs help with internationalization. If a translation into your
 language is missing and you wish to get involved, here is what to do.
 
-Let's say you want to create a Dutch translation of **nautilus-bluetooth**. This
-package comes with only two strings to translate:
+Let's say you want to create a Dutch translation of **Nautilus Nluetooth**
+(`nl`). This package comes with only two strings to translate:
 
 1. “Send via Bluetooth”
 2. “Send the selected files to a Bluetooth device”
 
-First thing to do is to make sure that `gettext` and `intltool` are installed
-on your system. Then clone this repository and launch the following four
-commands:
+First thing to do is to make sure that **GNU Autotools** and **GNU gettext**
+are installed on your system. Then clone this repository and launch the
+following commands:
 
 ``` sh
-cd nautilus-bluetooth/po
-intltool-update -p --gettext-package=nautilus-bluetooth
-msginit -l nl
-rm nautilus-bluetooth.pot
+./bootstrap
+make -C po nautilus-bluetooth.pot
+(cd po && msginit -l nl)
+./bootstrap --clean
 ```
 
 Now edit the `po/LINGUAS` file and add a new line containing the abbreviated
@@ -34,17 +34,7 @@ name of the new language (`nl`).
 Finally, open the file `po/nl.po` and translate the two strings above. All you
 have to do now is to commit your changes.
 
-If you want to update an existing Dutch translation to the most recent changes
-in the extension source code, launch
-
-``` sh
-cd nautilus-bluetooth/po
-intltool-update -p --gettext-package=nautilus-bluetooth
-mv nl.po nl.po.bak && msgmerge nl.po.bak nautilus-bluetooth.pot > nl.po
-rm nautilus-bluetooth.pot nl.po.bak
-```
-
-For any issue, [drop me a message][1].
+For any issue, [drop a message][1].
 
 
 NExtGen

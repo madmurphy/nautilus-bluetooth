@@ -1,21 +1,24 @@
-News
+NEWS
 ====
 
 
-0.1.5
------
+## 1.0.3
+
+* Internationalization does not depend on **XDG intltool** anymore, but only on
+  **GNU gettext**
+
+
+## 0.1.5
 
 * Added Turkish translation
 
 
-0.1.1
------
+## 0.1.1
 
 * Added German translation
 
 
-0.1.0
------
+## 0.1.0
 
 **Nautilus Bluetooth** has been published.
 

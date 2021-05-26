@@ -45,7 +45,7 @@
 #ifdef ENABLE_NLS
 #include <glib/gi18n-lib.h>
 #define I18N_INIT() \
-	bindtextdomain(GETTEXT_PACKAGE, NAUTILUS_BLUETOOTH_LOCALEDIR)
+	bindtextdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR)
 #else
 #define _(STRING) STRING
 #define I18N_INIT()
@@ -58,12 +58,6 @@
 |*| GLOBAL TYPES AND VARIABLES
 |*|
 \*/
-
-
-#ifdef G_LOG_DOMAIN
-#undef G_LOG_DOMAIN
-#endif
-#define G_LOG_DOMAIN "Nautilus-Bluetooth"
 
 typedef struct {
 	GObject parent_slot;
