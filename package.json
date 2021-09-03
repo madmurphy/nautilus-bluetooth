@@ -1,6 +1,6 @@
 {
 	"name": "nautilus-bluetooth",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "A simple Nautilus extension that adds a \"Send via Bluetooth\" entry to Nautilus' right-click menu",
 	"homepage": "https://gitlab.gnome.org/madmurphy/nautilus-bluetooth",
 	"author": "madmurphy333@gmail.com",
@@ -15,7 +15,7 @@
 		"gnome-bluetooth": "*"
 	},
 	"devDependencies": {
-		"gettext": "*",
+		"gettext": ">=0.19",
 		"pkgconf": "*"
 	},
 	"src": [

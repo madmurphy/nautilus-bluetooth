@@ -8,7 +8,7 @@ dnl  **************************************************************************
 AC_PREREQ([2.69])
 
 AC_INIT([Nautilus Bluetooth],
-	[1.0.3],
+	[1.0.4],
 	[madmurphy333@gmail.com],
 	[nautilus-bluetooth],
 	[https://gitlab.gnome.org/madmurphy/nautilus-bluetooth])
@@ -76,7 +76,7 @@ dnl  **************************************************************************
 
 AM_GNU_GETTEXT([external])
 
-AM_GNU_GETTEXT_VERSION([0.21])
+AM_GNU_GETTEXT_VERSION([0.19])
 
 AM_CONDITIONAL([NLS_ENABLED], [test "x${USE_NLS}" != xno])
 
