@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-bluetooth 1.0.5\n"
+"Project-Id-Version: nautilus-bluetooth 2.0.0\n"
 "Report-Msgid-Bugs-To: madmurphy333@gmail.com\n"
-"POT-Creation-Date: 2019-08-28 13:59+0100\n"
+"POT-Creation-Date: 2022-10-28 16:42+0100\n"
 "PO-Revision-Date: 2019-08-28 13:59+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/nautilus-bluetooth.c:154
+#: src/nautilus-bluetooth.c:153
 msgid "Send via Bluetooth"
 msgstr "Envoyer via Bluetooth"
 
-#: src/nautilus-bluetooth.c:155
+#: src/nautilus-bluetooth.c:154
 msgid "Send the selected files to a Bluetooth device"
 msgstr "Envoyer les fichiers sélectionnés à un périphérique Bluetooth"

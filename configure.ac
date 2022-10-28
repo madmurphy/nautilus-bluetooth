@@ -8,7 +8,7 @@ dnl  **************************************************************************
 AC_PREREQ([2.69])
 
 AC_INIT([Nautilus Bluetooth],
-	[1.0.5],
+	[2.0.0],
 	[madmurphy333@gmail.com],
 	[nautilus-bluetooth],
 	[https://gitlab.gnome.org/madmurphy/nautilus-bluetooth])
@@ -93,8 +93,8 @@ dnl  **************************************************************************
 
 AC_ARG_WITH([nautilus-libdir],
 	[AS_HELP_STRING([--without-nautilus-libdir],
-		[ignore the <libdir> variable used by libnautilus-extension-4 and
-		and use the current <libdir> instead @<:@default=no@:>@])],
+		[ignore the <libdir> variable used by libnautilus-extension-4
+		and and use the current <libdir> instead @<:@default=no@:>@])],
 	[:],
 	[AS_VAR_SET([with_nautilus_libdir], ['yes'])])
 

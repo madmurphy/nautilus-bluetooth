@@ -7,13 +7,13 @@ AM_CPPFLAGS = \
 	"-DG_LOG_DOMAIN=\"NautilusBluetooth\""
 
 AM_CFLAGS = \
-	-Wall\
+	-Wall \
+	-Wextra \
 	-g \
 	-pedantic \
 	$(WARN_CFLAGS) \
 	$(NAUTILUS_CFLAGS) \
-	$(GLIB_CFLAGS) \
-	$(NAUTILUS_BLUETOOTH_CFLAGS)
+	$(GLIB_CFLAGS)
 
 nautilus_extensiondir = $(NAUTILUS_EXTENSION_DIR)
 
@@ -22,6 +22,9 @@ nautilus_extension_LTLIBRARIES = \
 
 libnautilus_bluetooth_la_SOURCES = \
 	nautilus-bluetooth.c
+
+libnautilus_bluetooth_la_CFLAGS = \
+	$(NAUTILUS_BLUETOOTH_CFLAGS)
 
 libnautilus_bluetooth_la_LDFLAGS = \
 	-module \
