@@ -38,7 +38,7 @@ AC_CHECK_PROG([HAVE_PKGCONFIG], [pkg-config], [yes], [no])
 AS_IF([test "x${HAVE_PKGCONFIG}" = xno],
 	[AC_MSG_ERROR([you need to have pkgconfig installed!])])
 
-PKG_CHECK_MODULES([NAUTILUS_BLUETOOTH], [glib-2.0 libnautilus-extension])
+PKG_CHECK_MODULES([NAUTILUS_BLUETOOTH], [glib-2.0 libnautilus-extension-4])
 
 
 dnl  **************************************************************************
@@ -93,7 +93,7 @@ dnl  **************************************************************************
 
 AC_ARG_WITH([nautilus-libdir],
 	[AS_HELP_STRING([--without-nautilus-libdir],
-		[ignore the <libdir> variable used by libnautilus-extension and
+		[ignore the <libdir> variable used by libnautilus-extension-4 and
 		and use the current <libdir> instead @<:@default=no@:>@])],
 	[:],
 	[AS_VAR_SET([with_nautilus_libdir], ['yes'])])
@@ -101,10 +101,10 @@ AC_ARG_WITH([nautilus-libdir],
 AS_IF([test "x${with_nautilus_libdir}" = xno],
 	[AS_VAR_SET([NAUTILUS_EXTENSION_DIR], m4_normalize(["$(
 		"${PKG_CONFIG}" --define-variable='libdir=${libdir}'
-			--variable=extensiondir libnautilus-extension
+			--variable=extensiondir libnautilus-extension-4
 	)"]))],
 	[AS_VAR_SET([NAUTILUS_EXTENSION_DIR], m4_normalize(["$(
-		"${PKG_CONFIG}" --variable=extensiondir libnautilus-extension
+		"${PKG_CONFIG}" --variable=extensiondir libnautilus-extension-4
 	)"]))])
 
 AC_SUBST([NAUTILUS_EXTENSION_DIR])
